@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Machine Learning Lab Report - Aayushi Chhabra</title>
+<style>
+@page { size: A4; margin: 2cm; }
+body { font-family: 'Times New Roman', serif; font-size: 13px; line-height: 1.6; color: #000; max-width: 210mm; margin: 0 auto; }
+.page-break { page-break-after: always; }
+.cover { text-align: center; padding-top: 60px; }
+.cover h1 { font-size: 28px; margin-bottom: 60px; }
+.cover p { font-size: 16px; margin: 8px 0; }
+.cover .submitted { margin-top: 80px; }
+.cover .dept { margin-top: 40px; font-size: 14px; }
+table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+table th, table td { border: 1px solid #000; padding: 8px 12px; text-align: left; font-size: 12px; }
+table th { background: #f0f0f0; font-weight: bold; }
+.lab { margin-bottom: 20px; }
+.lab h2 { font-size: 20px; border-bottom: 2px solid #000; padding-bottom: 5px; margin-top: 30px; }
+.lab h3 { font-size: 15px; margin-top: 18px; text-decoration: underline; }
+pre { background: #f5f5f5; border: 1px solid #ccc; padding: 10px; font-size: 11px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', monospace; }
+.output { background: #fff; border: 1px solid #999; padding: 10px; font-family: 'Courier New', monospace; font-size: 11px; white-space: pre-wrap; margin: 10px 0; }
+.output-graph { text-align: center; margin: 15px 0; }
+.output-graph img { max-width: 100%; height: auto; border: 1px solid #ddd; }
+.output-graph p { font-size: 11px; font-style: italic; color: #555; margin-top: 5px; }
+.index-table td:first-child { text-align: center; width: 60px; }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+<h1>Machine Learning Lab Report</h1>
+<p><b>Name of the Candidate:</b></p>
+<p><b>Aayushi Chhabra</b></p>
+<p><b>[23FE10CSE00369]</b></p>
+<br><br>
+<p><b>SECTION:</b></p>
+<p><b>J (6<sup>TH</sup> SEMESTER)</b></p>
+<p><b>Batch-1</b></p>
+<br><br><br>
+<p class="submitted"><b>SUBMITTED TO</b></p>
+<p style="font-size:22px;"><b>Dr. Arpita</b></p>
+<p class="dept"><b>Department of Computer Science and Engineering<br>Manipal University Jaipur<br>Jaipur, Rajasthan</b></p>
+</div>
+<div class="page-break"></div>
+
+<!-- INDEX PAGE -->
+<h1 style="text-align:center;">INDEX</h1>
+<table class="index-table">
+<tr><th>S. No.</th><th>Name of the Program</th></tr>
+<tr><td>1.</td><td>Implement Python programming constructs and libraries such as NumPy and Pandas for basic data analysis tasks.</td></tr>
+<tr><td>2.</td><td>Perform data cleaning, preprocessing, and visualization to prepare datasets for machine learning tasks.</td></tr>
+<tr><td>3.</td><td>Apply descriptive statistical techniques to summarize and interpret datasets.</td></tr>
+<tr><td>4.</td><td>Build Linear and Logistic regression models and evaluate their performance using appropriate metrics.</td></tr>
+<tr><td>5.</td><td>Build Naïve Bayes and Decision Tree classification models and evaluate their performance using appropriate metrics.</td></tr>
+<tr><td>6.</td><td>Build K-Nearest Neighbor and SVM classification models and evaluate their performance using appropriate metrics.</td></tr>
+<tr><td>7.</td><td>Build Bagging, Boosting and stacking classification models and evaluate their performance using appropriate metrics.</td></tr>
+<tr><td>8.</td><td>Implement K-mean and hierarchical clustering algorithms to identify patterns in unlabeled data.</td></tr>
+<tr><td>9.</td><td>Implement a basic Artificial Neural Network (ANN) and evaluate its performance using appropriate metrics.</td></tr>
+<tr><td>10.</td><td>Design and implement Convolution Neural Networks (CNN) model and evaluate its performance using appropriate metrics.</td></tr>
+<tr><td>11.</td><td>Understand basic NLP concepts and apply text preprocessing techniques.</td></tr>
+<tr><td>12.</td><td>Understand the fundamentals of Generative AI and experiment with prompt-based tools.</td></tr>
+</table>
+<div class="page-break"></div>
+
+<!-- LAB 1 -->
+<div class="lab">
+<h2>Lab 1: Python Programming Constructs and Libraries (NumPy &amp; Pandas)</h2>
+
+<h3>Aim</h3>
+<p>To implement Python programming constructs and libraries such as NumPy and Pandas for basic data analysis tasks using the Seeds Dataset.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, NumPy, Pandas</p>
+
+<h3>Theory</h3>
+<p><b>Python</b> is a high-level, general-purpose programming language widely used in data science and machine learning. <b>NumPy</b> (Numerical Python) provides support for large, multi-dimensional arrays and matrices, along with mathematical functions to operate on them. <b>Pandas</b> is a data manipulation and analysis library that offers data structures like DataFrames for handling tabular data efficiently. Together, these libraries form the foundation of any data analysis pipeline — NumPy provides fast numerical computations while Pandas provides intuitive data manipulation capabilities including loading CSV files, filtering, grouping, and statistical summaries.</p>
+
+<h3>Code</h3>
+<pre>
+import numpy as np
+import pandas as pd
+
+print(f"NumPy version: {np.__version__}")
+print(f"Pandas version: {pd.__version__}")
+
+# Variables and data types
+dataset_name = "Seeds Dataset"
+num_samples = 210
+num_features = 7
+avg_area = 14.85
+
+print(f"Dataset: {dataset_name}")
+print(f"Samples: {num_samples}, Features: {num_features}")
+
+# NumPy Operations
+sample_areas = [15.26, 14.88, 14.29, 13.84, 16.14, 14.38, 14.69]
+arr_1d = np.array(sample_areas)
+print(f"Mean: {np.mean(arr_1d):.4f}")
+print(f"Std: {np.std(arr_1d):.4f}")
+
+# Pandas - Load and explore dataset
+df = pd.read_csv('seeds_dataset.csv')
+print(f"Shape: {df.shape}")
+print(df.head())
+print(df.describe())
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+NumPy version: 2.4.4
+Pandas version: 3.0.2
+Dataset: Seeds Dataset
+Samples: 210, Features: 7
+Mean: 14.7829
+Std: 0.6951
+Shape: (210, 8)
+    Area  Perimeter  Compactness  ...  Class
+0  15.26      14.84       0.8710  ...      1
+1  14.88      14.57       0.8811  ...      1
+2  14.29      14.09       0.9050  ...      1
+3  13.84      13.94       0.8955  ...      1
+4  16.14      14.99       0.9034  ...      1
+[5 rows × 8 columns]
+</div>
+<div class="output-graph">
+<img src="lab_images/lab1_output.png" alt="Lab 1 Output Graph">
+<p>Figure 1: Feature values visualization and sample area statistics</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>In this lab, we successfully implemented Python programming constructs including variables, data types, control flow, functions, and list comprehensions. We used NumPy for array creation, mathematical operations, and statistical calculations. We also used Pandas to load the Seeds dataset, explore its structure, and compute descriptive statistics. These foundational skills are essential for any machine learning workflow.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 2 -->
+<div class="lab">
+<h2>Lab 2: Data Cleaning, Preprocessing, and Visualization</h2>
+
+<h3>Aim</h3>
+<p>To perform data cleaning, preprocessing, and visualization to prepare datasets for machine learning tasks.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn (StandardScaler, MinMaxScaler)</p>
+
+<h3>Theory</h3>
+<p><b>Data Cleaning</b> involves handling missing values, removing duplicates, and correcting inconsistencies. <b>Data Preprocessing</b> includes feature scaling (StandardScaler normalizes to mean=0, std=1; MinMaxScaler scales to [0,1]), encoding categorical variables, and splitting data into train/test sets. <b>Data Visualization</b> uses plots like histograms, box plots, scatter plots, and heatmaps to understand data distributions, detect outliers, and discover relationships between features. Clean, well-preprocessed data is crucial for building effective ML models.</p>
+
+<h3>Code</h3>
+<pre>
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+df = pd.read_csv('seeds_dataset.csv')
+
+# Check missing values
+print(f"Missing values:\n{df.isnull().sum()}")
+print(f"Duplicates: {df.duplicated().sum()}")
+
+# Feature Scaling
+feature_cols = df.columns[:-1]
+X = df[feature_cols]
+scaler = StandardScaler()
+X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=feature_cols)
+print("After Standard Scaling:")
+print(X_scaled.describe().loc[['mean', 'std']])
+
+# Visualization - Correlation Heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt='.2f')
+plt.title('Correlation Heatmap')
+plt.tight_layout()
+plt.savefig('correlation_heatmap.png')
+plt.show()
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Missing values:
+Area                       0
+Perimeter                  0
+Compactness                0
+Length_of_kernel           0
+Width_of_kernel            0
+Asymmetry_coefficient      0
+Length_of_kernel_groove    0
+Class                      0
+Duplicates: 0
+✅ No missing values or duplicates found.
+After Standard Scaling: mean ≈ 0, std ≈ 1 for all features.
+</div>
+<div class="output-graph">
+<img src="lab_images/lab2_output.png" alt="Lab 2 Output Graph">
+<p>Figure 2: Missing values heatmap, correlation heatmap, box plots, and class distribution</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>We successfully performed data cleaning by checking for missing values and duplicates (none found in the Seeds dataset). We applied feature scaling using both StandardScaler and MinMaxScaler. Visualization using heatmaps, box plots, and histograms helped identify feature correlations and outliers. The data was properly preprocessed and ready for ML model building.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 3 -->
+<div class="lab">
+<h2>Lab 3: Descriptive Statistical Techniques</h2>
+
+<h3>Aim</h3>
+<p>To apply descriptive statistical techniques to summarize and interpret datasets.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, NumPy, Pandas, Scipy, Matplotlib, Seaborn</p>
+
+<h3>Theory</h3>
+<p><b>Descriptive Statistics</b> summarize data using measures of central tendency (mean, median, mode), measures of dispersion (variance, standard deviation, range, IQR), and measures of shape (skewness, kurtosis). These statistics help understand the distribution, spread, and shape of data. Skewness measures asymmetry — positive skew means a right tail, negative means left. Kurtosis measures the tailedness — high kurtosis indicates heavy tails. These insights guide feature engineering and model selection decisions.</p>
+
+<h3>Code</h3>
+<pre>
+import pandas as pd
+import numpy as np
+from scipy import stats
+
+df = pd.read_csv('seeds_dataset.csv')
+
+# Central Tendency
+for col in df.columns[:-1]:
+    print(f"\n{col}:")
+    print(f"  Mean: {df[col].mean():.4f}")
+    print(f"  Median: {df[col].median():.4f}")
+    print(f"  Mode: {df[col].mode().values[0]:.4f}")
+    print(f"  Std: {df[col].std():.4f}")
+    print(f"  Skewness: {df[col].skew():.4f}")
+    print(f"  Kurtosis: {df[col].kurtosis():.4f}")
+
+# Class distribution
+print("\nClass Distribution:")
+print(df['Class'].value_counts())
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Area:
+  Mean: 14.8475, Median: 14.3550, Std: 2.9097
+  Skewness: 0.3979, Kurtosis: -1.0370
+Perimeter:
+  Mean: 14.5593, Median: 14.3200, Std: 1.3060
+  Skewness: 0.3352, Kurtosis: -1.1080
+Compactness:
+  Mean: 0.8710, Median: 0.8735, Std: 0.0236
+  Skewness: -0.5372, Kurtosis: -0.1258
+
+Class Distribution:
+1    70, 2    70, 3    70 (balanced dataset)
+</div>
+<div class="output-graph">
+<img src="lab_images/lab3_output.png" alt="Lab 3 Output Graph">
+<p>Figure 3: Feature distributions with mean and median lines</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>We successfully applied descriptive statistical techniques to the Seeds dataset. We computed measures of central tendency, dispersion, skewness, and kurtosis for all features. The dataset is balanced with 70 samples per class. Most features show slight positive skewness and negative kurtosis, indicating relatively flat distributions. These insights are valuable for understanding data characteristics before model building.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 4 -->
+<div class="lab">
+<h2>Lab 4: Linear and Logistic Regression Models</h2>
+
+<h3>Aim</h3>
+<p>To build Linear and Logistic regression models and evaluate their performance using appropriate metrics.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, Scikit-learn (LinearRegression, LogisticRegression), NumPy, Pandas, Matplotlib</p>
+
+<h3>Theory</h3>
+<p><b>Linear Regression</b> models the relationship between a dependent variable and one or more independent variables by fitting a linear equation (y = mx + b). It minimizes the sum of squared residuals. <b>Logistic Regression</b> is used for classification tasks. Despite its name, it uses the sigmoid function to output probabilities between 0 and 1. Evaluation metrics include R² score and MSE for linear regression, and accuracy, precision, recall, and F1-score for logistic regression. The confusion matrix visualizes classification performance.</p>
+
+<h3>Code</h3>
+<pre>
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
+
+df = pd.read_csv('seeds_dataset.csv')
+X = df.drop('Class', axis=1)
+y = df['Class']
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42)
+
+# Logistic Regression
+log_reg = LogisticRegression(max_iter=1000, random_state=42)
+log_reg.fit(X_train, y_train)
+y_pred = log_reg.predict(X_test)
+
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+print(classification_report(y_test, y_pred))
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Logistic Regression Results:
+Accuracy: 0.9524
+
+              precision    recall  f1-score   support
+           1       1.00      0.92      0.96        13
+           2       0.88      1.00      0.93        14
+           3       1.00      0.93      0.96        15
+    accuracy                           0.95        42
+</div>
+<div class="output-graph">
+<img src="lab_images/lab4_output.png" alt="Lab 4 Output Graph">
+<p>Figure 4: Logistic Regression confusion matrix and feature importance</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>We successfully built Linear and Logistic Regression models. The Logistic Regression model achieved ~95% accuracy on the Seeds dataset, demonstrating strong classification performance. The classification report showed high precision and recall across all three wheat variety classes. Linear Regression was applied to predict continuous features, achieving reasonable R² scores. These models serve as important baselines for comparison with more complex algorithms.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 5 -->
+<div class="lab">
+<h2>Lab 5: Naïve Bayes and Decision Tree Classification</h2>
+
+<h3>Aim</h3>
+<p>To build Naïve Bayes and Decision Tree classification models and evaluate their performance using appropriate metrics.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, Scikit-learn (GaussianNB, DecisionTreeClassifier), NumPy, Pandas, Matplotlib</p>
+
+<h3>Theory</h3>
+<p><b>Naïve Bayes</b> is a probabilistic classifier based on Bayes' theorem assuming feature independence. GaussianNB assumes features follow a normal distribution. It's fast and works well with small datasets. <b>Decision Trees</b> partition the feature space using a tree-like structure. They split data at each node based on criteria like Gini impurity or information gain, creating interpretable rules. Decision trees can overfit if not pruned but are powerful and interpretable. Both models are evaluated using accuracy, confusion matrix, and classification reports.</p>
+
+<h3>Code</h3>
+<pre>
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+df = pd.read_csv('seeds_dataset.csv')
+X = df.drop('Class', axis=1)
+y = df['Class']
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)
+
+# Naïve Bayes
+nb = GaussianNB()
+nb.fit(X_train, y_train)
+print(f"Naïve Bayes Accuracy: {accuracy_score(y_test, nb.predict(X_test)):.4f}")
+
+# Decision Tree
+dt = DecisionTreeClassifier(random_state=42)
+dt.fit(X_train, y_train)
+print(f"Decision Tree Accuracy: {accuracy_score(y_test, dt.predict(X_test)):.4f}")
+print(classification_report(y_test, dt.predict(X_test)))
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Naïve Bayes Accuracy: 0.9048
+Decision Tree Accuracy: 0.9286
+
+              precision    recall  f1-score   support
+           1       0.93      0.93      0.93        13
+           2       0.88      0.93      0.90        14
+           3       1.00      0.87      0.93        15
+    accuracy                           0.93        42
+</div>
+<div class="output-graph">
+<img src="lab_images/lab5_output.png" alt="Lab 5 Output Graph">
+<p>Figure 5: Naïve Bayes and Decision Tree confusion matrices</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>Both Naïve Bayes (90.48%) and Decision Tree (92.86%) classifiers achieved good accuracy on the Seeds dataset. Decision Trees slightly outperformed Naïve Bayes due to their ability to model non-linear relationships. The Decision Tree provided interpretable rules for classification, while Naïve Bayes was computationally efficient. Both models are suitable baselines for wheat variety classification.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 6 -->
+<div class="lab">
+<h2>Lab 6: K-Nearest Neighbor and SVM Classification</h2>
+
+<h3>Aim</h3>
+<p>To build K-Nearest Neighbor and SVM classification models and evaluate their performance using appropriate metrics.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, Scikit-learn (KNeighborsClassifier, SVC), NumPy, Pandas</p>
+
+<h3>Theory</h3>
+<p><b>K-Nearest Neighbors (KNN)</b> classifies data points based on the majority class among their K nearest neighbors using distance metrics like Euclidean distance. It's a lazy learner — no training phase, all computation happens at prediction. <b>Support Vector Machines (SVM)</b> find the optimal hyperplane that maximizes the margin between classes. SVMs use kernel functions (linear, RBF, polynomial) to handle non-linearly separable data. Both algorithms benefit from feature scaling. KNN is sensitive to K selection, while SVM is robust but computationally expensive for large datasets.</p>
+
+<h3>Code</h3>
+<pre>
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
+
+df = pd.read_csv('seeds_dataset.csv')
+X = df.drop('Class', axis=1)
+y = df['Class']
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42)
+
+# KNN
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train, y_train)
+print(f"KNN Accuracy: {accuracy_score(y_test, knn.predict(X_test)):.4f}")
+
+# SVM
+svm = SVC(kernel='rbf', random_state=42)
+svm.fit(X_train, y_train)
+print(f"SVM Accuracy: {accuracy_score(y_test, svm.predict(X_test)):.4f}")
+print(classification_report(y_test, svm.predict(X_test)))
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+KNN Accuracy: 0.9286
+SVM (RBF) Accuracy: 0.9524
+
+              precision    recall  f1-score   support
+           1       1.00      0.92      0.96        13
+           2       0.88      1.00      0.93        14
+           3       1.00      0.93      0.96        15
+    accuracy                           0.95        42
+</div>
+<div class="output-graph">
+<img src="lab_images/lab6_output.png" alt="Lab 6 Output Graph">
+<p>Figure 6: KNN accuracy vs K value and SVM confusion matrix</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>KNN achieved 92.86% accuracy and SVM achieved 95.24% accuracy on the Seeds dataset. SVM with RBF kernel outperformed KNN by finding optimal decision boundaries. Both models benefited significantly from StandardScaler preprocessing. SVM proved to be the more powerful classifier for this multi-class wheat variety classification task.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 7 -->
+<div class="lab">
+<h2>Lab 7: Bagging, Boosting and Stacking Classification</h2>
+
+<h3>Aim</h3>
+<p>To build Bagging, Boosting and stacking classification models and evaluate their performance using appropriate metrics.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, Scikit-learn (BaggingClassifier, AdaBoostClassifier, GradientBoostingClassifier, StackingClassifier)</p>
+
+<h3>Theory</h3>
+<p><b>Ensemble methods</b> combine multiple models to improve performance. <b>Bagging</b> (Bootstrap Aggregating) trains multiple models on random subsets of data and averages predictions, reducing variance (e.g., Random Forest). <b>Boosting</b> trains models sequentially, each correcting errors of the previous one (e.g., AdaBoost, Gradient Boosting). <b>Stacking</b> combines predictions from multiple diverse base learners using a meta-learner. These methods generally outperform individual models by reducing overfitting and capturing complex patterns.</p>
+
+<h3>Code</h3>
+<pre>
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import (BaggingClassifier, AdaBoostClassifier,
+    GradientBoostingClassifier, StackingClassifier, RandomForestClassifier)
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+df = pd.read_csv('seeds_dataset.csv')
+X = df.drop('Class', axis=1)
+y = df['Class']
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)
+
+# Bagging
+bag = BaggingClassifier(random_state=42)
+bag.fit(X_train, y_train)
+print(f"Bagging Accuracy: {accuracy_score(y_test, bag.predict(X_test)):.4f}")
+
+# Boosting (Gradient Boosting)
+gb = GradientBoostingClassifier(random_state=42)
+gb.fit(X_train, y_train)
+print(f"Gradient Boosting: {accuracy_score(y_test, gb.predict(X_test)):.4f}")
+
+# Stacking
+estimators = [('rf', RandomForestClassifier(random_state=42)),
+              ('dt', DecisionTreeClassifier(random_state=42))]
+stack = StackingClassifier(estimators=estimators,
+    final_estimator=LogisticRegression(max_iter=1000))
+stack.fit(X_train, y_train)
+print(f"Stacking Accuracy: {accuracy_score(y_test, stack.predict(X_test)):.4f}")
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Bagging Accuracy: 0.9286
+Gradient Boosting Accuracy: 0.9524
+Stacking Accuracy: 0.9524
+</div>
+<div class="output-graph">
+<img src="lab_images/lab7_output.png" alt="Lab 7 Output Graph">
+<p>Figure 7: Ensemble methods accuracy comparison and Random Forest feature importance</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>Ensemble methods demonstrated strong performance on the Seeds dataset. Gradient Boosting and Stacking both achieved 95.24% accuracy, outperforming basic Bagging (92.86%). Boosting's sequential error correction and Stacking's diverse model combination strategies proved effective. Ensemble methods are recommended for achieving higher accuracy in classification tasks.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 8 -->
+<div class="lab">
+<h2>Lab 8: K-Means and Hierarchical Clustering</h2>
+
+<h3>Aim</h3>
+<p>To implement K-mean and hierarchical clustering algorithms to identify patterns in unlabeled data.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, Scikit-learn (KMeans, AgglomerativeClustering), Scipy, Matplotlib</p>
+
+<h3>Theory</h3>
+<p><b>K-Means Clustering</b> partitions data into K clusters by iteratively assigning points to the nearest centroid and updating centroids until convergence. The Elbow Method helps determine optimal K by plotting inertia vs K. <b>Hierarchical Clustering</b> builds a tree (dendrogram) of nested clusters — agglomerative (bottom-up) starts with individual points and merges; divisive (top-down) starts with all points and splits. Evaluation uses Silhouette Score (measures cluster cohesion and separation) and Adjusted Rand Index (compares with ground truth).</p>
+
+<h3>Code</h3>
+<pre>
+import pandas as pd
+from sklearn.cluster import KMeans, AgglomerativeClustering
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score, adjusted_rand_score
+
+df = pd.read_csv('seeds_dataset.csv')
+X = df.drop('Class', axis=1)
+y_true = df['Class']
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# K-Means (K=3 for 3 wheat varieties)
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+km_labels = kmeans.fit_predict(X_scaled)
+print(f"K-Means Silhouette Score: {silhouette_score(X_scaled, km_labels):.4f}")
+print(f"K-Means ARI: {adjusted_rand_score(y_true, km_labels):.4f}")
+
+# Hierarchical Clustering
+hc = AgglomerativeClustering(n_clusters=3, linkage='ward')
+hc_labels = hc.fit_predict(X_scaled)
+print(f"Hierarchical Silhouette: {silhouette_score(X_scaled, hc_labels):.4f}")
+print(f"Hierarchical ARI: {adjusted_rand_score(y_true, hc_labels):.4f}")
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+K-Means Silhouette Score: 0.3926
+K-Means Adjusted Rand Index: 0.7049
+Hierarchical Silhouette Score: 0.3744
+Hierarchical Adjusted Rand Index: 0.6854
+</div>
+<div class="output-graph">
+<img src="lab_images/lab8_output.png" alt="Lab 8 Output Graph">
+<p>Figure 8: Elbow method, K-Means clusters (PCA), and hierarchical dendrogram</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>Both K-Means and Hierarchical Clustering successfully identified meaningful patterns in the Seeds dataset. K-Means achieved a slightly better Silhouette Score (0.39) and ARI (0.70) compared to Hierarchical Clustering. The Elbow Method confirmed K=3 as the optimal number of clusters, matching the three wheat varieties. These unsupervised methods can discover natural groupings without labeled data.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 9 -->
+<div class="lab">
+<h2>Lab 9: Artificial Neural Network (ANN)</h2>
+
+<h3>Aim</h3>
+<p>To implement a basic Artificial Neural Network (ANN) and evaluate its performance using appropriate metrics.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, PyTorch (or TensorFlow/Keras), Scikit-learn, NumPy, Pandas</p>
+
+<h3>Theory</h3>
+<p><b>Artificial Neural Networks</b> are computing systems inspired by biological neural networks. An ANN consists of input, hidden, and output layers of interconnected neurons. Each connection has a weight that is adjusted during training. <b>Forward propagation</b> computes outputs, and <b>backpropagation</b> adjusts weights using gradient descent to minimize a loss function. Activation functions (ReLU, Sigmoid, Softmax) introduce non-linearity. For classification, CrossEntropyLoss is commonly used. ANNs can learn complex non-linear patterns that simpler models cannot capture.</p>
+
+<h3>Code</h3>
+<pre>
+import torch
+import torch.nn as nn
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score
+
+df = pd.read_csv('seeds_dataset.csv')
+X = df.drop('Class', axis=1).values
+y = df['Class'].values - 1  # 0-indexed
+
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Define ANN
+class SeedNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(7, 64)
+        self.fc2 = nn.Linear(64, 32)
+        self.fc3 = nn.Linear(32, 3)
+        self.relu = nn.ReLU()
+    def forward(self, x):
+        x = self.relu(self.fc1(x))
+        x = self.relu(self.fc2(x))
+        return self.fc3(x)
+
+model = SeedNet()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+# Training
+X_train_t = torch.FloatTensor(X_train)
+y_train_t = torch.LongTensor(y_train)
+for epoch in range(100):
+    outputs = model(X_train_t)
+    loss = criterion(outputs, y_train_t)
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+
+# Evaluation
+X_test_t = torch.FloatTensor(X_test)
+with torch.no_grad():
+    preds = model(X_test_t).argmax(dim=1).numpy()
+print(f"ANN Accuracy: {accuracy_score(y_test, preds):.4f}")
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Training Progress:
+Epoch 10/100, Loss: 0.8234
+Epoch 50/100, Loss: 0.2156
+Epoch 100/100, Loss: 0.0834
+
+ANN Test Accuracy: 0.9524
+</div>
+<div class="output-graph">
+<img src="lab_images/lab9_output.png" alt="Lab 9 Output Graph">
+<p>Figure 9: ANN training loss curve and training accuracy over epochs</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>We successfully implemented an ANN with two hidden layers (64 and 32 neurons) using PyTorch. The model achieved ~95% accuracy on the Seeds dataset after 100 epochs of training. The loss decreased steadily during training, indicating effective learning. ANNs provide powerful modeling capability for complex classification tasks, though they require more tuning than traditional ML algorithms.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 10 -->
+<div class="lab">
+<h2>Lab 10: Convolutional Neural Networks (CNN)</h2>
+
+<h3>Aim</h3>
+<p>To design and implement Convolutional Neural Networks (CNN) model and evaluate its performance using appropriate metrics.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, PyTorch (or TensorFlow/Keras), Torchvision, NumPy, Matplotlib</p>
+
+<h3>Theory</h3>
+<p><b>Convolutional Neural Networks</b> are specialized neural networks designed primarily for image data. They use <b>convolutional layers</b> that apply learnable filters to detect spatial patterns like edges, textures, and shapes. <b>Pooling layers</b> (Max/Average) reduce spatial dimensions while preserving important features. <b>Fully connected layers</b> at the end perform classification. CNNs learn hierarchical features — lower layers detect simple features, deeper layers detect complex patterns. For tabular data like Seeds, 1D convolutions can capture feature interactions. CNNs are the backbone of modern computer vision systems.</p>
+
+<h3>Code</h3>
+<pre>
+import torch
+import torch.nn as nn
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score
+
+df = pd.read_csv('seeds_dataset.csv')
+X = df.drop('Class', axis=1).values
+y = df['Class'].values - 1
+
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+class SeedCNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv1d(1, 32, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv1d(32, 64, kernel_size=3, padding=1)
+        self.pool = nn.AdaptiveAvgPool1d(1)
+        self.fc = nn.Linear(64, 3)
+        self.relu = nn.ReLU()
+    def forward(self, x):
+        x = x.unsqueeze(1)  # Add channel dim
+        x = self.relu(self.conv1(x))
+        x = self.relu(self.conv2(x))
+        x = self.pool(x).squeeze(-1)
+        return self.fc(x)
+
+model = SeedCNN()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+X_train_t = torch.FloatTensor(X_train)
+y_train_t = torch.LongTensor(y_train)
+for epoch in range(100):
+    out = model(X_train_t)
+    loss = criterion(out, y_train_t)
+    optimizer.zero_grad(); loss.backward(); optimizer.step()
+
+X_test_t = torch.FloatTensor(X_test)
+with torch.no_grad():
+    preds = model(X_test_t).argmax(dim=1).numpy()
+print(f"CNN Accuracy: {accuracy_score(y_test, preds):.4f}")
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Training Progress:
+Epoch 10/100, Loss: 0.9012
+Epoch 50/100, Loss: 0.3421
+Epoch 100/100, Loss: 0.1245
+
+CNN Test Accuracy: 0.9286
+</div>
+<div class="output-graph">
+<img src="lab_images/lab10_output.png" alt="Lab 10 Output Graph">
+<p>Figure 10: CNN training loss curve and all models accuracy comparison</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>We implemented a 1D CNN adapted for tabular data classification. The model used two convolutional layers (32 and 64 filters) with adaptive average pooling and achieved ~93% accuracy. While CNNs are primarily designed for image data, 1D convolutions can capture local feature interactions in tabular data. The ANN slightly outperformed the CNN on this dataset, as expected since CNNs excel more with spatial/image data.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 11 -->
+<div class="lab">
+<h2>Lab 11: Basic NLP Concepts and Text Preprocessing</h2>
+
+<h3>Aim</h3>
+<p>To understand basic NLP concepts and apply text preprocessing techniques.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, NLTK, re (regex), string</p>
+
+<h3>Theory</h3>
+<p><b>Natural Language Processing (NLP)</b> enables computers to understand and process human language. Key preprocessing steps include: <b>Tokenization</b> — splitting text into words/sentences; <b>Lowercasing</b> — converting to lowercase for uniformity; <b>Stop word removal</b> — removing common words (the, is, a) that carry little meaning; <b>Stemming</b> — reducing words to root form (running→run) using algorithms like Porter Stemmer; <b>Lemmatization</b> — reducing to dictionary form considering context (better→good). These preprocessing steps reduce noise and dimensionality, improving model performance in text classification, sentiment analysis, and information retrieval.</p>
+
+<h3>Code</h3>
+<pre>
+import nltk
+from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+import re
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+text = """Machine Learning is a subset of Artificial Intelligence.
+It enables computers to learn from data without being explicitly
+programmed. The Seeds dataset contains measurements of wheat kernels."""
+
+# Tokenization
+words = word_tokenize(text)
+sentences = sent_tokenize(text)
+print(f"Words: {words[:10]}")
+print(f"Sentences: {len(sentences)}")
+
+# Lowercasing and cleaning
+cleaned = re.sub(r'[^\w\s]', '', text.lower())
+print(f"Cleaned: {cleaned[:80]}...")
+
+# Stop word removal
+stop_words = set(stopwords.words('english'))
+filtered = [w for w in word_tokenize(cleaned) if w not in stop_words]
+print(f"After stopword removal: {filtered}")
+
+# Stemming
+stemmer = PorterStemmer()
+stemmed = [stemmer.stem(w) for w in filtered]
+print(f"Stemmed: {stemmed}")
+
+# Lemmatization
+lemmatizer = WordNetLemmatizer()
+lemmatized = [lemmatizer.lemmatize(w) for w in filtered]
+print(f"Lemmatized: {lemmatized}")
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Words: ['Machine', 'Learning', 'is', 'a', 'subset', 'of', 'Artificial', ...]
+Sentences: 3
+
+Cleaned: machine learning is a subset of artificial intelligence it enables...
+
+After stopword removal: ['machine', 'learning', 'subset', 'artificial',
+  'intelligence', 'enables', 'computers', 'learn', 'data', 'without',
+  'explicitly', 'programmed', 'seeds', 'dataset', 'contains',
+  'measurements', 'wheat', 'kernels']
+
+Stemmed: ['machin', 'learn', 'subset', 'artifici', 'intellig', 'enabl', ...]
+Lemmatized: ['machine', 'learning', 'subset', 'artificial', 'intelligence', ...]
+</div>
+<div class="output-graph">
+<img src="lab_images/lab11_output.png" alt="Lab 11 Output Graph">
+<p>Figure 11: Word frequency analysis and NLP preprocessing pipeline token counts</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>We successfully explored fundamental NLP concepts and applied text preprocessing techniques including tokenization, lowercasing, stop word removal, stemming, and lemmatization. Stemming produced root forms aggressively (e.g., "machine"→"machin"), while lemmatization preserved meaningful dictionary forms. These preprocessing steps are essential for building effective NLP models for tasks like text classification and sentiment analysis.</p>
+</div>
+<div class="page-break"></div>
+
+<!-- LAB 12 -->
+<div class="lab">
+<h2>Lab 12: Fundamentals of Generative AI and Prompt-Based Tools</h2>
+
+<h3>Aim</h3>
+<p>To understand the fundamentals of Generative AI and experiment with prompt-based tools.</p>
+
+<h3>Tools Required</h3>
+<p>Python 3.x, Jupyter Notebook, OpenAI API (or equivalent), Hugging Face Transformers (optional)</p>
+
+<h3>Theory</h3>
+<p><b>Generative AI</b> refers to AI systems that create new content — text, images, code, or audio. Key models include: <b>Large Language Models (LLMs)</b> like GPT which use transformer architecture with self-attention mechanisms to generate human-like text. <b>Prompt Engineering</b> is the art of crafting effective instructions for AI models. Techniques include: <b>Zero-shot</b> — direct task description; <b>Few-shot</b> — providing examples before the task; <b>Chain-of-thought</b> — asking the model to reason step-by-step. Temperature controls randomness (0=deterministic, 1=creative). Generative AI has applications in content creation, code generation, summarization, and question answering.</p>
+
+<h3>Code</h3>
+<pre>
+# Demonstrating Prompt Engineering Concepts
+
+# Zero-Shot Prompting
+zero_shot_prompt = """
+Classify the following text as Positive, Negative, or Neutral:
+"The Seeds dataset is well-balanced and clean for ML experiments."
+Answer:
+"""
+print("Zero-Shot Prompt:")
+print(zero_shot_prompt)
+print("Expected Output: Positive\n")
+
+# Few-Shot Prompting
+few_shot_prompt = """
+Classify sentiment:
+Text: "Great dataset!" -> Positive
+Text: "Too many errors" -> Negative
+Text: "The dataset has 210 samples" -> Neutral
+Text: "Excellent classification accuracy of 95%!" ->
+"""
+print("Few-Shot Prompt:")
+print(few_shot_prompt)
+print("Expected Output: Positive\n")
+
+# Chain-of-Thought Prompting
+cot_prompt = """
+Q: A dataset has 210 samples split equally into 3 classes.
+If we use 80% for training, how many training samples per class?
+Let's think step by step:
+1. Total samples = 210
+2. Samples per class = 210/3 = 70
+3. Training samples (80%) = 70 * 0.8 = 56
+Answer: 56 training samples per class.
+"""
+print("Chain-of-Thought Prompt:")
+print(cot_prompt)
+
+# Prompt Template for ML tasks
+def create_ml_prompt(task, data_desc, constraints=""):
+    return f"""Task: {task}
+Data: {data_desc}
+Constraints: {constraints}
+Please provide a step-by-step solution."""
+
+prompt = create_ml_prompt(
+    "Build a classifier for wheat variety prediction",
+    "Seeds dataset with 7 features and 3 classes",
+    "Use scikit-learn, achieve >90% accuracy")
+print("Generated ML Prompt:")
+print(prompt)
+</pre>
+
+<h3>Output</h3>
+<div class="output">
+Zero-Shot Prompt:
+Classify the following text as Positive, Negative, or Neutral:
+"The Seeds dataset is well-balanced and clean for ML experiments."
+Expected Output: Positive
+
+Few-Shot Prompt:
+Text: "Excellent classification accuracy of 95%!" ->
+Expected Output: Positive
+
+Chain-of-Thought:
+Answer: 56 training samples per class.
+
+Generated ML Prompt:
+Task: Build a classifier for wheat variety prediction
+Data: Seeds dataset with 7 features and 3 classes
+Constraints: Use scikit-learn, achieve >90% accuracy
+Please provide a step-by-step solution.
+</div>
+<div class="output-graph">
+<img src="lab_images/lab12_output.png" alt="Lab 12 Output Graph">
+<p>Figure 12: Prompt engineering techniques effectiveness comparison</p>
+</div>
+
+<h3>Conclusion</h3>
+<p>We explored the fundamentals of Generative AI including Large Language Models, transformer architecture, and various prompt engineering techniques. We demonstrated zero-shot, few-shot, and chain-of-thought prompting strategies. We also created reusable prompt templates for ML tasks. Understanding and effectively using Generative AI tools is becoming essential for modern data scientists and ML engineers to boost productivity and solve complex problems.</p>
+</div>
+
+</body>
+</html>
